@@ -111,10 +111,6 @@ export const media = {
     src: asset("photo-05.jpg"),
     alt: "Ram 1500 freshly detailed in a residential driveway",
   },
-  testimonial: {
-    src: asset("photo-04.jpg"),
-    alt: "Black GMC Yukon with a deep gloss finish",
-  },
   booking: {
     src: asset("photo-18.jpg"),
     alt: "White SUV detailed at a San Antonio home",

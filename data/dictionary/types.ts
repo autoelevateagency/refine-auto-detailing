@@ -49,11 +49,19 @@ export type Dictionary = {
     panels: Array<{ category: string; label: string }>;
   };
   testimonial: {
-    quote: string;
-    quoteEmphasis: string;
-    attribution: string;
-    attributionNote: string;
-    location: string;
+    eyebrow: string;
+    prevLabel: string;
+    nextLabel: string;
+    prevAria: string;
+    nextAria: string;
+    goToAria: string;
+    items: Array<{
+      quote: string;
+      quoteEmphasis: string;
+      attribution: string;
+      role: string;
+      location: string;
+    }>;
   };
   about: {
     eyebrow: string;

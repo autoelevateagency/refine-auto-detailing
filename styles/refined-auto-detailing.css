@@ -15,7 +15,6 @@
 html {
   scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px));
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 *,
@@ -37,7 +36,6 @@ body {
   color: var(--wh);
   font-family: var(--font-manrope), Manrope, system-ui, sans-serif;
   font-weight: 300;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -544,7 +542,8 @@ nav#nav.s {
 }
 
 .hs {
-  height: 400vh;
+  /* Desktop pin distance is set in ScrollController; auto avoids a black void if JS is late/off */
+  height: auto;
   position: relative;
 }
 
@@ -672,16 +671,6 @@ nav#nav.s {
   background: radial-gradient(60% 70% at 85% 80%, #2a3238, transparent 70%);
 }
 
-#tst .bgc {
-  position: absolute;
-  right: -8vw;
-  bottom: -6vh;
-  width: 70vw;
-  height: 55vh;
-  opacity: 0.35;
-  overflow: hidden;
-}
-
 .qm {
   position: absolute;
   left: 2vw;
@@ -692,24 +681,97 @@ nav#nav.s {
   line-height: 1;
 }
 
-.qt {
+.tst-carousel {
   position: relative;
   z-index: 2;
   margin-left: 12vw;
   max-width: 1100px;
+  width: min(1100px, 100%);
+  outline: none;
 }
 
-.qt h3 {
-  font-size: clamp(2.6rem, 7vw, 7.4rem);
+.tst-carousel:focus-visible {
+  outline: 1px solid rgba(25, 191, 239, 0.45);
+  outline-offset: 10px;
 }
 
-.qt h3 em {
+.tst-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 34px;
+  max-width: 720px;
+}
+
+.tst-eyebrow {
+  display: block;
+}
+
+.tst-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--si);
+  opacity: 0.72;
+}
+
+.tst-count b {
+  color: var(--wh);
+  font-weight: 500;
+}
+
+.tst-count i {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.tst-track {
+  position: relative;
+  min-height: clamp(260px, 38vh, 440px);
+}
+
+.tst-slide {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(36px, 0, 0);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.1, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.1, 1),
+    visibility 0.9s;
+  pointer-events: none;
+}
+
+.tst-slide.from-left {
+  transform: translate3d(-36px, 0, 0);
+}
+
+.tst-slide.is-on {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+}
+
+.tst-slide h3 {
+  font-size: clamp(2.4rem, 6.4vw, 6.8rem);
+  max-width: 16ch;
+}
+
+.tst-slide h3 em {
   font-style: normal;
   color: var(--cy);
 }
 
 .at {
-  margin-top: 56px;
+  margin-top: 48px;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -721,6 +783,146 @@ nav#nav.s {
   height: 1px;
   background: var(--si);
   opacity: 0.5;
+  flex: none;
+}
+
+.tst-person {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tst-name {
+  color: var(--wh);
+}
+
+.tst-role {
+  opacity: 0.55;
+  letter-spacing: 0.22em;
+}
+
+.tst-controls {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "nav auto"
+    "dots dots";
+  align-items: center;
+  gap: 22px 32px;
+  max-width: 680px;
+}
+
+.tst-nav {
+  grid-area: nav;
+  display: flex;
+  gap: 12px;
+}
+
+.tst-arrow {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(200, 204, 208, 0.28);
+  background: rgba(8, 10, 12, 0.28);
+  color: var(--wh);
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.tst-arrow svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.tst-arrow:hover,
+.tst-arrow:focus-visible {
+  border-color: var(--cy);
+  color: var(--cy);
+  background: rgba(25, 191, 239, 0.06);
+  outline: none;
+}
+
+.tst-auto {
+  grid-area: auto;
+  height: 1px;
+  background: rgba(200, 204, 208, 0.15);
+  overflow: hidden;
+}
+
+.tst-auto i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--cy);
+}
+
+.tst-auto i.is-running {
+  animation: tst-fill 7s linear forwards;
+}
+
+.tst-auto i.is-paused {
+  width: 18%;
+  opacity: 0.55;
+}
+
+@keyframes tst-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.tst-dots {
+  grid-area: dots;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tst-dot {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  width: 36px;
+  height: 2px;
+  background: rgba(200, 204, 208, 0.28);
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    width 0.35s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.tst-dot.is-on {
+  width: 56px;
+  background: var(--cy);
+}
+
+.tst-dot:focus-visible {
+  outline: 1px solid var(--cy);
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 #abt {
@@ -1378,12 +1580,24 @@ footer .d.o {
     min-height: auto;
   }
 
-  .qt {
+  .tst-carousel {
     margin-left: 0;
+    max-width: none;
+    width: 100%;
   }
 
-  .qt h3 {
+  .tst-head {
+    margin-bottom: 24px;
+    max-width: none;
+  }
+
+  .tst-track {
+    min-height: clamp(220px, 42vh, 360px);
+  }
+
+  .tst-slide h3 {
     font-size: clamp(2rem, 10vw, 4rem);
+    max-width: none;
   }
 
   .qm {
@@ -1391,17 +1605,45 @@ footer .d.o {
     font-size: clamp(8rem, 32vw, 18rem);
   }
 
-  #tst .bgc {
-    width: 90vw;
-    height: 40vh;
-    right: -20vw;
-    opacity: 0.22;
-  }
-
   .at {
     flex-wrap: wrap;
     gap: 14px;
     margin-top: 36px;
+  }
+
+  .at i {
+    width: 48px;
+  }
+
+  .tst-controls {
+    margin-top: 40px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "auto"
+      "dots";
+    gap: 18px;
+    max-width: none;
+  }
+
+  .tst-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tst-arrow {
+    flex: 1;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .tst-dot {
+    flex: 1;
+    max-width: 64px;
+  }
+
+  .tst-dot.is-on {
+    width: auto;
   }
 
   .ab1 {
@@ -1635,12 +1877,14 @@ footer .d.o {
   .sweep,
   .beam,
   .beam2,
-  .scr i {
+  .scr i,
+  .tst-auto i.is-running {
     animation: none;
   }
 
   .rv,
-  .mk > span {
+  .mk > span,
+  .tst-slide {
     transition: none;
   }
 
