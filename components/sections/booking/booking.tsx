@@ -1,4 +1,6 @@
+import { BackgroundVideo } from "@/components/ui/background-video";
 import type { Dictionary } from "@/data/dictionary";
+import { media } from "@/data/media";
 
 type BookingProps = {
   dict: Dictionary["booking"];
@@ -6,7 +8,14 @@ type BookingProps = {
 
 export const Booking = ({ dict }: BookingProps): React.ReactNode => {
   return (
-    <section id="book" className="grain">
+    <section id="book" className="grain" aria-label={media.booking.alt}>
+      <div
+        className="book-media"
+        aria-hidden="true"
+        style={{ backgroundImage: `url(${media.booking.src})` }}
+      >
+        <BackgroundVideo src={media.booking.video} poster={media.booking.src} />
+      </div>
       <div className="beam2" aria-hidden="true" />
       <div className="beam" aria-hidden="true" />
       <div className="bk2">

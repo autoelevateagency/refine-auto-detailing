@@ -50,11 +50,7 @@ export const SiteNav = ({ dict }: SiteNavProps): React.ReactNode => {
           {dict.book}
         </a>
       </div>
-      <a
-        className="mb l"
-        href="#book"
-        style={{ borderBottom: "1px solid var(--cy)", paddingBottom: "4px" }}
-      >
+      <a className="mb l" href="#book">
         {dict.bookMobile}
       </a>
     </nav>

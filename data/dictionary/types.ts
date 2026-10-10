@@ -34,7 +34,6 @@ export type Dictionary = {
       title: string;
       body: string;
       tags: string[];
-      photo: string;
     };
     exterior: {
       number: string;
@@ -42,14 +41,12 @@ export type Dictionary = {
       title: string;
       body: string;
       tags: string[];
-      photo: string;
     };
   };
   showcase: {
     eyebrow: string;
     title: string;
-    panels: Array<{ category: string; label: string; photo: string }>;
-    beforeAfterPhoto: string;
+    panels: Array<{ category: string; label: string }>;
   };
   testimonial: {
     quote: string;
@@ -59,7 +56,6 @@ export type Dictionary = {
     location: string;
   };
   about: {
-    photo: string;
     eyebrow: string;
     title: string;
     titleMuted: string;

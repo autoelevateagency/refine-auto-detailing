@@ -5,7 +5,6 @@ import { useEffect } from "react";
 export const ScrollController = (): null => {
   useEffect(() => {
     const nav = document.getElementById("nav");
-    const car = document.getElementById("car");
     const hs = document.getElementById("hs");
     const trk = document.getElementById("trk");
     const pg = document.getElementById("pg");
@@ -38,10 +37,6 @@ export const ScrollController = (): null => {
       const w = window.innerWidth;
 
       nav?.classList.toggle("s", y > 50);
-
-      if (car && y < window.innerHeight * 1.2) {
-        car.style.transform = `translate3d(${y * -0.06}px, ${y * 0.12}px, 0)`;
-      }
 
       if (w > 820 && hs && trk && pg) {
         const rect = hs.getBoundingClientRect();

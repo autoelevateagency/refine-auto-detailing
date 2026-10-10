@@ -1,4 +1,6 @@
+import { MediaFill } from "@/components/ui/media-fill";
 import type { Dictionary } from "@/data/dictionary";
+import { media } from "@/data/media";
 
 type AboutProps = {
   dict: Dictionary["about"];
@@ -9,30 +11,7 @@ export const About = ({ dict }: AboutProps): React.ReactNode => {
     <section id="abt">
       <div className="ab1">
         <div className="vis">
-          <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="b1" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#0a0c0e" />
-                <stop offset=".55" stopColor="#3a4248" />
-                <stop offset=".7" stopColor="#d9dde0" />
-                <stop offset=".8" stopColor="#1a1f23" />
-                <stop offset="1" stopColor="#050607" />
-              </linearGradient>
-            </defs>
-            <rect width="1400" height="700" fill="#0a0c0e" />
-            <path
-              d="M0 500C300 250 800 180 1400 330V700H0Z"
-              fill="url(#b1)"
-              opacity=".7"
-            />
-            <path
-              d="M0 500C300 250 800 180 1400 330"
-              stroke="#19BFEF"
-              fill="none"
-              opacity=".8"
-            />
-          </svg>
-          <span className="ph">{dict.photo}</span>
+          <MediaFill src={media.about.src} alt={media.about.alt} />
         </div>
       </div>
       <div className="ab2">

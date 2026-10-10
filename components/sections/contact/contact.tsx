@@ -41,19 +41,22 @@ export const Contact = ({ dict }: ContactProps): React.ReactNode => {
         <div>
           <span className="l">{dict.hoursLabel}</span>
           <p>
-            <em>{dict.hoursValue}</em>
+            <Multiline text={dict.hoursValue} />
           </p>
         </div>
         <div>
           <span className="l">{dict.phoneLabel}</span>
-          <a href="#book">
-            <em>{dict.phoneValue}</em>
+          <a href="tel:+12105550148" aria-label={dict.phoneValue}>
+            {dict.phoneValue}
           </a>
         </div>
         <div>
           <span className="l">{dict.emailLabel}</span>
-          <a href="#book">
-            <em>{dict.emailValue}</em>
+          <a
+            href={`mailto:${dict.emailValue}`}
+            aria-label={dict.emailValue}
+          >
+            {dict.emailValue}
           </a>
         </div>
       </div>
